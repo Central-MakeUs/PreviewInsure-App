@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, SafeAreaView, StatusBar, StyleSheet, Text, useColorScheme, View} from 'react-native';
+import {Dimensions, Platform, SafeAreaView, StatusBar, StyleSheet, Text, useColorScheme, View} from 'react-native';
 import WebView from 'react-native-webview';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
@@ -19,7 +19,11 @@ function App(): React.JSX.Element {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-      <WebView style={styles.webview} source={{uri: 'https://previewinsure.vercel.app'}}></WebView>
+      <WebView
+        // 구글 로그인 우회를 위한 userAgent
+        userAgent="Mozilla/5.0 AppleWebKit/535.19 Chrome/56.0.0 Mobile Safari/535.19"
+        style={styles.webview}
+        source={{uri: 'https://preview-insure-web-git-dev-sehuns-projects.vercel.app/'}}></WebView>
     </SafeAreaView>
   );
 }
