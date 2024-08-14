@@ -13,6 +13,10 @@ function App(): React.JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  // 구글 로그인 우회를 위함
+  const userAgent =
+    Platform.OS === 'android' ? 'Mozilla/5.0 AppleWebKit/535.19 Chrome/56.0.0 Mobile Safari/535.19' : undefined;
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar
