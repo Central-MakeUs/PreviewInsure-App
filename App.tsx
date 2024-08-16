@@ -1,5 +1,14 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Alert, BackHandler, Dimensions, SafeAreaView, StatusBar, StyleSheet, useColorScheme} from 'react-native';
+import {
+  Alert,
+  BackHandler,
+  Dimensions,
+  Platform,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  useColorScheme,
+} from 'react-native';
 import WebView from 'react-native-webview';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
@@ -12,7 +21,7 @@ const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
 
 function App(): React.JSX.Element {
-  const URL = 'https://preview-insure-web-git-dev-sehuns-projects.vercel.app/';
+  const URL = 'https://previewinsure.vercel.app/';
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -59,6 +68,10 @@ function App(): React.JSX.Element {
     };
   }, [navState]);
 
+  useEffect(() => {
+    webViewRef.current?.postMessage('Platform: ' + Platform.OS);
+  }, [webViewRef]);
+
   // 확대 막기
   const disableZoom = `
     const meta = document.createElement('meta');
@@ -99,8 +112,8 @@ const styles = StyleSheet.create({
   },
   webview: {
     flex: 1,
-    width: deviceWidth,
-    height: deviceHeight,
+    width: '100%',
+    height: '100%',
   },
 });
 
