@@ -69,7 +69,7 @@ function App(): React.JSX.Element {
   }, [navState]);
 
   useEffect(() => {
-    webViewRef.current?.postMessage('Platform: ' + Platform.OS);
+    webViewRef.current?.postMessage(JSON.stringify({platform: Platform.OS}));
   }, [webViewRef]);
 
   // 확대 막기
