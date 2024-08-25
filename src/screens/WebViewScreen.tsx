@@ -57,6 +57,11 @@ function WebViewScreen(): React.JSX.Element {
     webViewRef.current?.postMessage(JSON.stringify({platform: Platform.OS}));
   }, [webViewRef]);
 
+  const handleOnLoad = () => {
+    webViewRef.current?.postMessage(JSON.stringify({platform: Platform.OS}));
+    // console.log('Platform 정보 전송됨:', Platform.OS);
+  };
+
   // 확대 막기
   const disableZoom = `
     const meta = document.createElement('meta');
@@ -79,6 +84,7 @@ function WebViewScreen(): React.JSX.Element {
       }}
       // 확대 막기
       injectedJavaScript={disableZoom}
+      onLoad={handleOnLoad}
     />
   );
 }
