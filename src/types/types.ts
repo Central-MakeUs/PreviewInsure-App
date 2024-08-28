@@ -1,4 +1,4 @@
 export type RootStackParamList = {
-  Home: undefined;
+  프리뷰인슈: undefined;
   Details: {url: string};
 };

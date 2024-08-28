@@ -13,12 +13,12 @@ const StackNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="프리뷰인슈"
         screenOptions={{
           ...TransitionPresets.SlideFromRightIOS,
           headerShown: false,
         }}>
-        <Stack.Screen name="Home" component={WebViewScreen} />
+        <Stack.Screen name="프리뷰인슈" component={WebViewScreen} />
         <Stack.Screen
           name="Details"
           component={WebStackScreen}

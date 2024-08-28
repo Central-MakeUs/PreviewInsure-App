@@ -9,7 +9,7 @@ interface navType {
   canGoBack: boolean;
 }
 
-type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, '프리뷰인슈'>;
 
 interface WebviewContainerProps {
   navigation: HomeScreenNavigationProp;
