@@ -1,13 +1,21 @@
+import {StackNavigationProp} from '@react-navigation/stack';
 import React, {useEffect, useRef, useState} from 'react';
 import {Alert, BackHandler, Platform, StyleSheet} from 'react-native';
-import WebView from 'react-native-webview';
+import WebView, {WebViewMessageEvent} from 'react-native-webview';
+import {RootStackParamList} from '../types/types';
 
 interface navType {
   url: string;
   canGoBack: boolean;
 }
 
-function WebViewScreen(): React.JSX.Element {
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, '프리뷰인슈'>;
+
+interface WebviewContainerProps {
+  navigation: HomeScreenNavigationProp;
+}
+
+function WebViewScreen({navigation}: WebviewContainerProps): React.JSX.Element {
   const URL = 'https://previewinsure.vercel.app/';
 
   // 뒤로가기 설정
@@ -71,10 +79,21 @@ function WebViewScreen(): React.JSX.Element {
     true; // note: this is required, or the webview will not load correctly
   `;
 
+  // 새탭열기
+  const requestOnMessage = async (e: WebViewMessageEvent): Promise<void> => {
+    const nativeEvent = JSON.parse(e.nativeEvent.data);
+    // console.log(nativeEvent);
+    if (nativeEvent?.type === 'ROUTER_EVENT') {
+      const url: string = nativeEvent.data;
+      navigation.navigate('Details', {url: url});
+    }
+  };
+
   return (
     <WebView
       style={styles.webview}
       source={{uri: URL}}
+      onMessage={requestOnMessage}
       // 구글 로그인 userAgent
       userAgent="Mozilla/5.0 AppleWebKit/535.19 Chrome/56.0.0 Mobile Safari/535.19"
       // 뒤로가기 설정
