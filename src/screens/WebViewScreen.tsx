@@ -3,6 +3,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Alert, BackHandler, Platform, StyleSheet} from 'react-native';
 import WebView, {WebViewMessageEvent} from 'react-native-webview';
 import {RootStackParamList} from '../types/types';
+import {StackActions} from '@react-navigation/native';
 
 interface navType {
   url: string;
@@ -85,7 +86,12 @@ function WebViewScreen({navigation}: WebviewContainerProps): React.JSX.Element {
     // console.log(nativeEvent);
     if (nativeEvent?.type === 'ROUTER_EVENT') {
       const url: string = nativeEvent.data;
-      navigation.navigate('Details', {url: url});
+      if (url === 'back') {
+        const popAction = StackActions.pop(1);
+        navigation.dispatch(popAction);
+      } else {
+        navigation.navigate('Details', {url: url});
+      }
     }
   };
 
