@@ -61,6 +61,8 @@ const WebStackScreen: React.FC<WebStackContainerProps> = ({route, navigation}) =
     <WebView
       style={styles.webview}
       source={{uri: url}}
+      // 구글 로그인 userAgent
+      userAgent="Mozilla/5.0 AppleWebKit/535.19 Chrome/56.0.0 Mobile Safari/535.19"
       // 뒤로가기 설정
       onNavigationStateChange={(nav: navType) => {
         setNavState({url: nav.url, canGoBack: nav.canGoBack});
